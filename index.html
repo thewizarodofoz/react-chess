@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+</head>
+<body>
+<script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+</script>
+<div class="content">
+    <p>lorem ipsum etc...</p>
+    <div id="/21716879748/norush-ad-2" style="width: 970px; height: 90px;">
+        <script>
+            googletag.cmd.push(function () { googletag.display('/21716879748/norush-ad-2'); });
+        </script>
+    </div>
+    <p>lorem ipsum etc...</p>
+    <div id="/21716879748/norush-ad-1" style="width: 300px; height: 250px;">
+        <script>
+            googletag.cmd.push(function () { googletag.display('/21716879748/norush-ad-1'); });
+        </script>
+    </div>
+</div>
+<script>
+    const config = {
+        analyticsBaseUrl: 'bis.vidazoo.com',
+        // analyticsBaseUrl: 'localhost:8090',
+        analyticsParams: {
+            country: 'IL',
+            os: 'OS X',
+            browser: 'Chrome_66',
+            page: 'wow-this-is-great',
+            domain: 'norush.io',
+        },
+        auctionTimeout: 1000,
+        bidderSettings: {
+            vidazoo: {
+                bidCpmAdjustment: function(bidCpm) {
+                    return bidCpm * 1.2;
+                }
+            }
+        },
+        // adUnits: []
+        adUnits: [
+            {
+                code: '/21716879748/norush-ad-1',
+                mediaTypes: {
+                    banner: {
+                        sizes: [[300, 250]]
+                    }
+                },
+                bids: [{
+                    bidder: 'vidazoo',
+                    params: {
+                        cId: '5b1524d639254f0004a76611',
+                        pId: '5b1524d639254f0004a76611',
+                        bidFloor: 0.1
+                    }
+                }]
+            },
+            {
+                code: '/21716879748/norush-ad-2',
+                mediaTypes: {
+                    banner: {
+                        sizes: [[970, 90]]
+                    }
+                },
+                bids: [{
+                    bidder: 'vidazoo',
+                    params: {
+                        cId: '5b1524d639254f0004a76611',
+                        pId: '5b1524d639254f0004a76611',
+                        bidFloor: 0.1
+                    }
+                }]
+            }
+        ],
+    };
+
+    ContentPlayer.init(config);
+</script>
+</body>
+</html>
