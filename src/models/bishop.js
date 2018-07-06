@@ -1,21 +1,36 @@
 import BasePiece from './base-piece';
-import {Direction, DirectionMultiplier} from '../common/enums';
+import { CellStatus, Direction, DirectionMultiplier } from '../common/enums';
 
-export default class Rook extends BasePiece {
+export default class Bishop extends BasePiece {
 
     constructor(matrix, direction) {
         super(matrix, direction);
     }
 
-    getPositions(position) {
-        const [i, j] = position;
-        const moves = [];
-        moves.push([i + (1 * DirectionMultiplier[this._direction]), j]);
-        if (this.isInStartingPosition(position)) {
-            moves.push([i + (2 * DirectionMultiplier[this._direction]), j]);
-        }
+    getPositions(startingPosition) {
+        const positions = [];
 
-        return moves.filter(this.isPositionAllowed.bind(this));
+        const moves = [
+            [1, 1],
+            [-1, 1],
+            [-1, -1],
+            [1, -1],
+        ];
+
+        moves.forEach(([iStep, jStep]) => this.getPositionsRecursively(startingPosition, iStep, jStep, positions));
+
+        return positions;
+    }
+
+    getPositionsRecursively([i, j], iStep, jStep, positions) {
+        const move = [i + iStep, j + jStep];
+        const nextMoveStatus = this._matrix.getCellStatusForPiece(move, this);
+        if (nextMoveStatus !== CellStatus.UNREACHABLE) {
+            positions.push([move, nextMoveStatus]);
+            if (nextMoveStatus === CellStatus.HABITABLE) {
+                this.getPositionsRecursively(move, iStep, jStep, positions);
+            }
+        }
     }
 
 }

@@ -1,0 +1,59 @@
+$cell-size: 70px;
+
+.game {
+  width: 80%;
+  margin: 5% auto 0 auto;
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.board {
+  border: 3px solid black;
+  display: table;
+  margin: 0 auto;
+
+  .board-row {
+    display: table-row;
+  }
+
+  .board-cell {
+    display: table-cell;
+    height: $cell-size;
+    width: $cell-size;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid lightgray;
+    cursor: pointer;
+
+    &.direction-up {
+      color: white;
+    }
+
+    &.direction-down {
+      color: black;
+    }
+
+    &.dark {
+      background-color: saddlebrown;
+    }
+
+    &.light {
+      background-color: sandybrown;
+    }
+
+    &:hover {
+      background-color: yellow;
+    }
+
+    &.habitable {
+      background-color: yellowgreen;
+    }
+
+    &.occupiable {
+      background-color: indianred;
+    }
+  }
+}

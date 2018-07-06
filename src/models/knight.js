@@ -1,21 +1,36 @@
 import BasePiece from './base-piece';
-import {Direction, DirectionMultiplier} from '../common/enums';
+import {CellStatus} from '../common/enums';
 
-export default class King extends BasePiece {
+export default class Knight extends BasePiece {
 
     constructor(matrix, direction) {
         super(matrix, direction);
     }
 
-    getPositions(position) {
-        const [i, j] = position;
-        const moves = [];
-        moves.push([i + (1 * DirectionMultiplier[this._direction]), j]);
-        if (this.isInStartingPosition(position)) {
-            moves.push([i + (2 * DirectionMultiplier[this._direction]), j]);
-        }
+    getPositions(startingPosition) {
+        const positions = [];
 
-        return moves.filter(this.isPositionAllowed.bind(this));
+        const [i, j] = startingPosition;
+        const moves = [
+            [2, 1],
+            [2, -1],
+            [-2, 1],
+            [-2, -1],
+            [1, 2],
+            [1, -2],
+            [-1, 2],
+            [-1, -2],
+        ];
+
+        moves.forEach(([iStep, jStep]) => {
+            const move = [i + iStep, j + jStep];
+            const moveStatus = this._matrix.getCellStatusForPiece(move, this);
+            if (moveStatus !== CellStatus.UNREACHABLE) {
+                positions.push([move, moveStatus]);
+            }
+        });
+
+        return positions;
     }
 
 }

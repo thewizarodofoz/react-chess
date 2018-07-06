@@ -1,25 +1,32 @@
 import BasePiece from './base-piece';
-import {Direction, DirectionMultiplier} from '../common/enums';
+import {Direction, DirectionMultiplier, CellStatus} from '../common/enums';
 
-export default class Pawn extends BasePiece {
+export default class Rook extends BasePiece {
 
     constructor(matrix, direction) {
         super(matrix, direction);
     }
 
-    getPositions(position) {
-        const [i, j] = position;
-        const moves = [];
-        moves.push([i + (1 * DirectionMultiplier[this._direction]), j]);
-        if (this.isInStartingPosition(position)) {
-            moves.push([i + (2 * DirectionMultiplier[this._direction]), j]);
-        }
+    getPositions(startingPosition) {
+        const positions = [];
 
-        return moves.filter(this.isPositionAllowed.bind(this));
+        this.getPositionsRecursively(startingPosition, 1, 0, positions);
+        this.getPositionsRecursively(startingPosition, 0, -1, positions);
+        this.getPositionsRecursively(startingPosition, -1, 0, positions);
+        this.getPositionsRecursively(startingPosition, 0, -1, positions);
+
+        return positions;
     }
 
-    isInStartingPosition([i, _]) {
-        return this.direction === Direction.DOWN ? i === 1 : i === 6;
+    getPositionsRecursively([i, j], iStep, jStep, positions) {
+        const move = [i + iStep, j + jStep];
+        const nextMoveStatus = this._matrix.getCellStatusForPiece(move, this);
+        if (nextMoveStatus !== CellStatus.UNREACHABLE) {
+            positions.push([move, nextMoveStatus]);
+            if (nextMoveStatus === CellStatus.HABITABLE) {
+                this.getPositionsRecursively(move, iStep, jStep, positions);
+            }
+        }
     }
 
 }

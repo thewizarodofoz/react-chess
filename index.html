@@ -2,86 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chess</title>
 
-    <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.production.min.js" integrity="sha256-wouRkivKKXA3y6AuyFwcDcF50alCNV8LbghfYCH6Z98=" crossorigin="anonymous"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.production.min.js" integrity="sha256-9hrJxD4IQsWHdNpzLkJKYGiY/SEZFJJSUqyeZPNKd8g=" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.development.js" integrity="sha256-oK7yxCBxbvB6f0k30sHQEN7rIMklxeiFkzO/xOqA054=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.development.js" integrity="sha256-MENkb7k+X0cdQau8EP2kECRfc0A4Lq9uo6QGSnWgK0o=" crossorigin="anonymous"></script>
 </head>
 <body>
-<script>
-    var googletag = googletag || {};
-    googletag.cmd = googletag.cmd || [];
-</script>
-<div class="content">
-    <p>lorem ipsum etc...</p>
-    <div id="/21716879748/norush-ad-2" style="width: 970px; height: 90px;">
-        <script>
-            googletag.cmd.push(function () { googletag.display('/21716879748/norush-ad-2'); });
-        </script>
-    </div>
-    <p>lorem ipsum etc...</p>
-    <div id="/21716879748/norush-ad-1" style="width: 300px; height: 250px;">
-        <script>
-            googletag.cmd.push(function () { googletag.display('/21716879748/norush-ad-1'); });
-        </script>
-    </div>
-</div>
-<script>
-    const config = {
-        analyticsBaseUrl: 'bis.vidazoo.com',
-        // analyticsBaseUrl: 'localhost:8090',
-        analyticsParams: {
-            country: 'IL',
-            os: 'OS X',
-            browser: 'Chrome_66',
-            page: 'wow-this-is-great',
-            domain: 'norush.io',
-        },
-        auctionTimeout: 1000,
-        bidderSettings: {
-            vidazoo: {
-                bidCpmAdjustment: function(bidCpm) {
-                    return bidCpm * 1.2;
-                }
-            }
-        },
-        // adUnits: []
-        adUnits: [
-            {
-                code: '/21716879748/norush-ad-1',
-                mediaTypes: {
-                    banner: {
-                        sizes: [[300, 250]]
-                    }
-                },
-                bids: [{
-                    bidder: 'vidazoo',
-                    params: {
-                        cId: '5b1524d639254f0004a76611',
-                        pId: '5b1524d639254f0004a76611',
-                        bidFloor: 0.1
-                    }
-                }]
-            },
-            {
-                code: '/21716879748/norush-ad-2',
-                mediaTypes: {
-                    banner: {
-                        sizes: [[970, 90]]
-                    }
-                },
-                bids: [{
-                    bidder: 'vidazoo',
-                    params: {
-                        cId: '5b1524d639254f0004a76611',
-                        pId: '5b1524d639254f0004a76611',
-                        bidFloor: 0.1
-                    }
-                }]
-            }
-        ],
-    };
-
-    ContentPlayer.init(config);
-</script>
+<div id="root"></div>
 </body>
 </html>

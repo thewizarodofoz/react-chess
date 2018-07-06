@@ -3,6 +3,7 @@ process.noDeprecation = true;
 const webpack = require('webpack');
 const package = require('./package.json');
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgeCDNPlugin = require('webpack-highwinds-purge-plugin');
 const S3Plugin = require('webpack-s3-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -29,7 +30,7 @@ const config = {
     context: contextPath,
 
     entry: {
-        player: 'player.js'
+        chess: 'index.js'
     },
 
     resolve: {
@@ -43,8 +44,12 @@ const config = {
         publicPath: '/',
         chunkFilename: '_[name].js',
         filename: '[name].js',
-        libraryTarget: 'var',
-        library: ['ContentPlayer']
+        libraryTarget: 'umd',
+    },
+
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM",
     },
 
     module: {
@@ -55,6 +60,14 @@ const config = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ],
             }
         ]
     },
@@ -78,7 +91,7 @@ const config = {
 
 if (isProduction) {
 
-    config.output.publicPath = `//static.vidazoo.com/basev/content-player/${package.version}/`;
+    config.output.publicPath = `//static.vidazoo.com/basev/content-chess/${package.version}/`;
 
     config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
 
@@ -92,7 +105,7 @@ if (isProduction) {
     config.plugins.push(new S3Plugin({
         include: /.*\.(js)/,
         directory: `lib`,
-        basePath: `content-player/${package.version}/`,
+        basePath: `content-chess/${package.version}/`,
         s3Options: {
             accessKeyId: process.env.VAULT_AWS_ACCESS_KEY_ID,
             secretAccessKey: process.env.VAULT_AWS_SECRET_KEY_ID,
@@ -105,7 +118,7 @@ if (isProduction) {
     }));
 
     config.plugins.push(new PurgeCDNPlugin([{
-            url: `http://static.vidazoo.com/basev/content-player/${package.version}/`,
+            url: `http://static.vidazoo.com/basev/content-chess/${package.version}/`,
             recursive: true
         }], {
             accountId: process.env.VAULT_HIGHWINDS_ACCOUNT_ID,
@@ -116,7 +129,7 @@ if (isProduction) {
 
 if (isDevelopment) {
     config.plugins.push(new HtmlWebpackPlugin({
-        inject: "head",
+        inject: "body",
         template: "../index.html"
     }));
 
@@ -125,7 +138,7 @@ if (isDevelopment) {
         contentBase: contextPath,
         port: 8282,
         open: true,
-        openPage: '/index.html?vidazooDebug=true',
+        openPage: '/index.html',
     };
 }
 
