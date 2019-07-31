@@ -29,11 +29,11 @@
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "webpack": "4.38.0",
-    "webpack-dev-server": "3.1.4",
+    "webpack-dev-server": "3.7.2",
     "webpack-highwinds-purge-plugin": "0.0.3",
-    "webpack-s3-plugin": "1.0.0-rc.0"
+    "webpack-s3-plugin": "1.0.3"
   },
   "dependencies": {
-    "webpack-cli": "3.0.2"
+    "webpack-cli": "3.3.6"
   }
 }
